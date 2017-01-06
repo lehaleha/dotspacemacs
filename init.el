@@ -310,6 +310,20 @@ you should place your code here."
   ;;        (setq indent-tabs-mode nil)
   ;;        (setq tab-width 4)
   ;;        (setq indent-line-function (quote insert-tab))))
+
+
+  ;; Org-mode
+  (spacemacs/toggle-mode-line-org-clock-on)
+  (setq org-clock-persist 'history)
+  (org-clock-persistence-insinuate)
+
+  (with-eval-after-load 'org
+   (setq-default
+    org-tags-column -120
+    org-startup-indented t))
+
+  ;; Alignment
+  (setq-default fill-column 140)
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -319,6 +333,7 @@ you should place your code here."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(org-agenda-files (quote ("~/life-org/status.org")))
  '(package-selected-packages
    (quote
     (smeargle orgit magit-gitflow helm-gitignore gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link evil-magit magit magit-popup git-commit with-editor org-projectile org-present org org-pomodoro alert log4e gntp org-download htmlize helm-company helm-c-yasnippet gnuplot company-statistics company auto-yasnippet yasnippet ac-ispell auto-complete ws-butler window-numbering which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide ido-vertical-mode hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed dash aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async quelpa package-build spacemacs-theme))))
