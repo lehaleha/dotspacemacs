@@ -329,7 +329,7 @@ you should place your code here."
 
   ;; Agenda vars
   (setq
-   org-agenda-files '("~/life-org")
+   org-agenda-files '("~/life-org/personal.org" "~/life-org/work.org")
    org-agenda-skip-scheduled-if-done t
    org-agenda-skip-deadline-if-done t)
 
