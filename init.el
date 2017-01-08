@@ -324,6 +324,9 @@ you should place your code here."
   (setq org-clock-persist 'history)
   (org-clock-persistence-insinuate)
 
+  ;; Set time format for stats
+  (setq org-time-clocksum-format (quote (:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t)))
+
   ;; Agenda vars
   (setq
    org-agenda-files '("~/life-org")
@@ -342,9 +345,9 @@ you should place your code here."
   (setq org-todo-keyword-faces
         (quote (("DOING" :foreground "deep sky blue" :weight bold)
                 ("WAIT" :foreground "orange" :weight bold)
-                ("CANCELLED" :foreground "forest green" :weight bold))))
-  (setq org-use-fast-todo-selection t)
-  (setq org-treat-S-cursor-todo-selection-as-state-change nil)
+                ("CANCELLED" :foreground "forest green" :weight bold)))
+        org-use-fast-todo-selection t
+        org-treat-S-cursor-todo-selection-as-state-change nil)
 
   (setq org-todo-state-tags-triggers
         (quote (("CANCELLED" ("cancelled" . t))
