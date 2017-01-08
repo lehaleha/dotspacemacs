@@ -133,7 +133,7 @@ values."
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
    dotspacemacs-default-font '("Input"
-                               :size 18
+                               :size 28
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -311,19 +311,93 @@ you should place your code here."
   ;;        (setq tab-width 4)
   ;;        (setq indent-line-function (quote insert-tab))))
 
+  ;; Alignment
+  (setq-default fill-column 140)
 
+  ;;
   ;; Org-mode
+  ;;
+
+  ;; Show clocked-in task always
   (spacemacs/toggle-mode-line-org-clock-on)
+  ;; Keep clock-history
   (setq org-clock-persist 'history)
   (org-clock-persistence-insinuate)
 
+  ;; Agenda vars
+  (setq
+   org-agenda-files '("~/life-org")
+   org-agenda-skip-scheduled-if-done t
+   org-agenda-skip-deadline-if-done t)
+
+  ;; Indents & alignment
   (with-eval-after-load 'org
    (setq-default
     org-tags-column -120
     org-startup-indented t))
 
-  ;; Alignment
-  (setq-default fill-column 140)
+  ;; Todo
+  (setq org-todo-keywords
+        (quote ((sequence "TODO(t)" "DOING(i)" "WAIT(w@/!)" "|" "DONE(d)" "CANCELLED(c@/!)"))))
+  (setq org-todo-keyword-faces
+        (quote (("DOING" :foreground "deep sky blue" :weight bold)
+                ("WAIT" :foreground "orange" :weight bold)
+                ("CANCELLED" :foreground "forest green" :weight bold))))
+  (setq org-use-fast-todo-selection t)
+  (setq org-treat-S-cursor-todo-selection-as-state-change nil)
+
+  (setq org-todo-state-tags-triggers
+        (quote (("CANCELLED" ("cancelled" . t))
+                ("WAIT" ("wait" . t))
+                (done ("wait"))
+                ("TODO" ("wait") ("cancelled"))
+                ("DOING" ("wait") ("cancelled"))
+                ("DONE" ("wait") ("cancelled")))))
+
+  ;; Automatic clock-in/out by Sacha + some tuning
+  ;; <<<<<<
+  (eval-after-load 'org
+    '(progn
+       (defun wicked/org-clock-in-if-doing ()
+         "Clock in when the task is marked DOING."
+         (when (and (string= org-state "DOING")
+                    (not (string= org-last-state org-state)))
+           (org-clock-in)))
+
+       (add-hook 'org-after-todo-state-change-hook
+                 'wicked/org-clock-in-if-doing)
+
+       (defun wicked/org-clock-out-if-not-doing ()
+         "Clock out when the task is changed from DOING to any other state."
+         (when (and (not (string= org-state "DOING"))
+                    (string= org-last-state "DOING")
+                    (not (string= org-last-state org-state))
+                    (equal (marker-buffer org-clock-marker) (current-buffer))
+                    (< (point) org-clock-marker)
+                    (> (save-excursion (outline-next-heading) (point))
+                       org-clock-marker))
+           (org-clock-out)))
+
+       (add-hook 'org-after-todo-state-change-hook
+                 'wicked/org-clock-out-if-not-doing)
+
+       (defun wicked/org-switch-to-doing-on-clock-in ()
+         (let ((status (nth 2 (org-heading-components))))
+         (when (and status
+                    (not (string= status "DOING")))
+           (org-todo "DOING"))))
+
+       (add-hook 'org-clock-in-hook
+                 'wicked/org-switch-to-doing-on-clock-in)
+
+       (defun wicked/org-switch-to-todo-on-clock-out ()
+         (when (string= (nth 2 (org-heading-components)) "DOING")
+           (org-todo "TODO")))
+
+       (add-hook 'org-clock-out-hook
+                 'wicked/org-switch-to-todo-on-clock-out)))
+  ;; >>>>>>>
+
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
