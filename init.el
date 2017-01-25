@@ -327,11 +327,16 @@ you should place your code here."
   ;; Set time format for stats
   (setq org-time-clocksum-format (quote (:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t)))
 
-  ;; Agenda vars
+  ;; Agenda & todo-list vars
   (setq
    org-agenda-files '("~/life-org/personal.org" "~/life-org/work.org")
    org-agenda-skip-scheduled-if-done t
-   org-agenda-skip-deadline-if-done t)
+   org-agenda-skip-deadline-if-done t
+   org-enforce-todo-dependencies t
+   org-enforce-todo-checkbox-dependencies t
+   org-agenda-dim-blocked-tasks 'invisible
+   org-agenda-todo-ignore-scheduled t
+   org-agenda-todo-ignore-deadlines t)
 
   ;; Indents & alignment
   (with-eval-after-load 'org
