@@ -298,6 +298,12 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
 
+  ;; Helper for includes 
+  (defun load-user-init-file (file)
+    (interactive "f")
+    "Load a file in current user's configuration directory"
+    (load-file (expand-file-name file dotspacemacs-directory)))
+
   ;; Humane C/C++ style
   (setq-default
    c-basic-offset 4
@@ -408,6 +414,9 @@ you should place your code here."
                  'wicked/org-switch-to-todo-on-clock-out)))
   ;; >>>>>>>
 
+  ;; Hierarchical archiving
+  (load-user-init-file "org-archive-subtree-hierachical.el")
+  (setq-default org-archive-default-command 'org-archive-subtree-hierarchical)
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
