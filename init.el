@@ -323,6 +323,8 @@ you should place your code here."
   ;; Keep clock-history
   (setq org-clock-persist 'history)
   (org-clock-persistence-insinuate)
+  ;; Prevent invisible edits
+  (setq org-catch-invisible-edits 'smart)
 
   ;; Set time format for stats
   (setq org-time-clocksum-format (quote (:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t)))
