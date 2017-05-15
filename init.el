@@ -451,6 +451,9 @@ you should place your code here."
           ("n" "Note" item (file+olp "~/Dropbox/org/personal.org" "Заметки")
            "- %u %?")))
   ;; <<<<<<<
+
+  ;; Treat plain lists as nodes (want them collapsed by default)
+  (setq org-cycle-include-plain-lists 'integrate)
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
