@@ -448,8 +448,8 @@ you should place your code here."
   (setq org-capture-templates
         '(("t" "Todo" entry (file+olp "~/Dropbox/org/someday.org" "Inbox")
            "* TODO %?\n")
-          ("n" "Note" entry (file+olp "~/Dropbox/org/personal.org" "Заметки")
-           "* %u\n- %?")))
+          ("n" "Note" item (file+olp "~/Dropbox/org/personal.org" "Заметки")
+           "- %u %?")))
   ;; <<<<<<<
 )
 
