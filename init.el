@@ -442,6 +442,15 @@ you should place your code here."
   (setq org-outline-path-complete-in-steps nil)
 
   ;; >>>>>>>
+
+  ;; Capture
+  ;; <<<<<<<
+  (setq org-capture-templates
+        '(("t" "Todo" entry (file+olp "~/Dropbox/org/someday.org" "Inbox")
+           "* TODO %?\n")
+          ("n" "Note" entry (file+olp "~/Dropbox/org/personal.org" "Заметки")
+           "* %u\n- %?")))
+  ;; <<<<<<<
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
