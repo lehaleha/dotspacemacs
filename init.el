@@ -418,6 +418,30 @@ you should place your code here."
   ;; Hierarchical archiving
   (load-user-init-file "org-archive-subtree-hierachical.el")
   (setq-default org-archive-default-command 'org-archive-subtree-hierarchical)
+
+  ;; Refile:
+  ;; <<<<<<<
+  ;; any headline with level <= 2 is a target
+  (setq org-refile-targets '((nil :maxlevel . 2)
+                                        ; all top-level headlines in the
+                                        ; current buffer are used (first) as a
+                                        ; refile target
+                             (org-agenda-files :maxlevel . 2)
+                             ("~/Dropbox/org/someday.org" :maxlevel . 2)
+                             ))
+
+  ;; provide refile targets as paths, including the file name
+  ;; (without directory) as level 1 of the path
+  (setq org-refile-use-outline-path 'file)
+
+  ;; allow to create new nodes (must be confirmed by the user) as
+  ;; refile targets
+  (setq org-refile-allow-creating-parent-nodes 'confirm)
+
+  ;; give all options by default, so Helm can be used to choose
+  (setq org-outline-path-complete-in-steps nil)
+
+  ;; >>>>>>>
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
