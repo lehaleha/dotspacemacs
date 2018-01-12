@@ -355,7 +355,7 @@ you should place your code here."
 
   ;; Todo
   (setq org-todo-keywords
-        (quote ((sequence "TODO(t)" "DOING(i)" "WAIT(w@/!)" "|" "DONE(d)" "CANCELLED(c@/!)"))))
+        (quote ((sequence "TODO(t)" "DOING(i)" "WAIT(w@/!)" "|" "DONE(d)" "ABANDONED(a@/!)"))))
   (setq org-todo-keyword-faces
         (quote (("DOING" :foreground "deep sky blue" :weight bold)
                 ("WAIT" :foreground "orange" :weight bold)
@@ -448,8 +448,11 @@ you should place your code here."
   (setq org-capture-templates
         '(("t" "Todo" entry (file+olp "~/Dropbox/org/someday.org" "Inbox")
            "* TODO %?\n")
+          ("T" "Todo in clocked-in" entry (clock) "* TODO %?\n")
           ("n" "Note" item (file+olp "~/Dropbox/org/personal.org" "Заметки")
-           "- %u %?")))
+           "- %u %?")
+          ("N" "Note in clocked-in" item (clock) "- %u %?")
+          ))
   ;; <<<<<<<
 
   ;; Treat plain lists as nodes (want them collapsed by default)
