@@ -335,7 +335,7 @@ you should place your code here."
   (setq org-catch-invisible-edits 'smart)
 
   ;; Set time format for stats
-  (setq org-time-clocksum-format (quote (:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t)))
+  (setq org-duration-format (quote h:mm))
 
   ;; Agenda & todo-list vars
   (setq
