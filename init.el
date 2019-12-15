@@ -320,7 +320,7 @@ you should place your code here."
   ;;        (setq indent-line-function (quote insert-tab))))
 
   ;; Alignment
-  (setq-default fill-column 140)
+  (setq-default fill-column 100)
 
   ;;
   ;; Org-mode
