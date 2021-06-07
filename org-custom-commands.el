@@ -50,26 +50,25 @@
   ;; Start/end are expected to be there. Otherwise it would use week of our birthdays %)
   (let* ((tstart (org-matcher-time (or (plist-get params :start) "<1983-10-11 Mon>")))
         (tend (org-matcher-time (or (plist-get params :end) "1983-10-17 Sun")))
-        (days (+(- (time-to-days tend) (time-to-days tstart)) 1))
-       )
+        (scope (or (plist-get params :scope) 'file))
+        (days (+(- (time-to-days tend) (time-to-days tstart)) 1)))
 
     ;;(insert (format "Dbg: Days: %d\n\n" days))
 
     ;; Print out table.
-    (insert (format "Time goals progress at [%s].\n" (current-time-string nil)))
-    (insert (format "Period of %d days: from [%s] to [%s].\n"
+    (insert (format "Time goals progress for %d days: from [%s] to [%s].\n"
                     days
                     (format-time-string "%d-%m-%Y %a" tstart)
                     (format-time-string "%d-%m-%Y %a" tend)))
     (insert "|-+-+-+-|\n")
-    (insert "| Area/Task    | Goal   | Clocked-in | Remaining | % complete |\n")
+    (insert "| Area/Task    | Target | Clocked-in | Remaining | % complete |\n")
     (insert "|-+-+-+-|\n")
     (insert (mapconcat 'identity
                        (org-map-entries
                         (lambda ()
                           (ll-get-timegoal-line days tstart tend)
                           )
-                        "DAILY_TIME_GOAL>0" 'agenda)
+                        "DAILY_TIME_GOAL>0" scope)
                        "\n"))
     (insert "\n|-+-+-+-|")
     (org-table-align))
