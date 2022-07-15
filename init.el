@@ -423,6 +423,9 @@ you should place your code here."
   (load-user-init-file "org-archive-subtree-hierachical.el")
   (setq-default org-archive-default-command 'org-archive-subtree-hierarchical)
 
+  ;; My hacks
+  (load-user-init-file "org-custom-commands.el")
+
   ;; Refile:
   ;; <<<<<<<
   ;; any headline with level <= 2 is a target

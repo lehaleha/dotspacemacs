@@ -41,8 +41,6 @@
 ;; Entrypoint for dynblock.
 ;;
 ;; Print time goals
-;; TODO
-;; - formatted
 (defun org-dblock-write:print-timegoals (params)
   "Prints time goals and clocked-in time for all entries from
    current org file which have DAILY_TIME_GOAL property."
@@ -56,12 +54,13 @@
     ;;(insert (format "Dbg: Days: %d\n\n" days))
 
     ;; Print out table.
-    (insert (format "Time goals progress for %d days: from [%s] to [%s].\n"
+    (insert (format "Time goals progress at [%s].\nPeriod of %d days: from [%s] to [%s].\n"
+                    (format-time-string "%d-%m-%Y %a %H:%M")
                     days
                     (format-time-string "%d-%m-%Y %a" tstart)
                     (format-time-string "%d-%m-%Y %a" tend)))
     (insert "|-+-+-+-|\n")
-    (insert "| Area/Task    | Target | Clocked-in | Remaining | % complete |\n")
+    (insert "| Area/Task    | Target | Clocked-in | % complete | Status | \n")
     (insert "|-+-+-+-|\n")
     (insert (mapconcat 'identity
                        (org-map-entries
@@ -81,26 +80,29 @@
   )
 
 ;; TODO:
-;; - Handle target period. 
+;; - Handle target period.
 ;; - optimize perf - call org-entry-properties and look up for all info
 (defun ll-get-timegoal-line (days tstart tend)
   "Returns timegoal status for an org-element at point"
-  (let ((goal (* (org-duration-to-minutes (org-entry-get (point) "DAILY_TIME_GOAL")) days))
-        (clocked (myorg-clock-sum-current-item tstart tend))
-
-        )
+  (let* ((goal (* (org-duration-to-minutes (org-entry-get (point) "DAILY_TIME_GOAL")) days))
+         (clocked (myorg-clock-sum-current-item tstart tend))
+         (dailygoal (/ goal days))
+         (statusStr (if (< clocked goal)
+                      (format "%s (%s/day) left"
+                        (org-duration-from-minutes (- goal clocked))
+                        (org-duration-from-minutes (/ (- goal clocked) days)))
+                       "Done")))
     (format
      ;; |name|goal|clocked-in (per-day)|delta (per-day)|%|
-     "| %s | %s | %s (%s/day) | %s (%s/day) | %s|"
+     "| %s | %s (%s/day) | %s (%s/day) | %s | %s |"
      (ll-get-title)
      (org-duration-from-minutes goal)
+     (org-duration-from-minutes dailygoal)
      (org-duration-from-minutes clocked)
      (org-duration-from-minutes (/ clocked days))
-     (org-duration-from-minutes (- goal clocked))
-     (org-duration-from-minutes (/ (- goal clocked) days))
      (format "%d%%" (*(/ clocked goal) 100))
-     )
-    )
+     statusStr)
+  )
 )
 
 ;;
