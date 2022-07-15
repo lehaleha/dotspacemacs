@@ -342,7 +342,7 @@ you should place your code here."
 
   ;; Agenda & todo-list vars
   (setq
-   org-agenda-files '("~/Dropbox/org/personal.org" "~/Dropbox/org/work.org")
+   org-agenda-files '("~/Dropbox/org/personal.org" "~/Dropbox/org/work.org" "~/Dropbox/org/system.org")
    org-agenda-skip-scheduled-if-done t
    org-agenda-skip-deadline-if-done t
    org-enforce-todo-dependencies t
@@ -453,10 +453,12 @@ you should place your code here."
   ;; Capture
   ;; <<<<<<<
   (setq org-capture-templates
-        '(("t" "Todo" entry (file+olp "~/Dropbox/org/someday.org" "Inbox")
+        '(("t" "Todo" entry (file+olp "~/Dropbox/org/system.org" "Inbox")
            "* TODO %?\n")
+          ("i" "Inbox" entry (file+olp "~/Dropbox/org/system.org" "Inbox")
+           "* %?\n")
           ("T" "Todo in clocked-in" entry (clock) "* TODO %?\n")
-          ("n" "Note" item (file+olp "~/Dropbox/org/personal.org" "Заметки")
+          ("n" "Note" item (file+olp "~/Dropbox/org/system.org" "Notes")
            "- %u %?")
           ("N" "Note in clocked-in" item (clock) "- %u %?")
           ))
