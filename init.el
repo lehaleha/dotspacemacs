@@ -340,14 +340,19 @@ you should place your code here."
   ;; Set time format for stats
   (setq org-duration-format (quote h:mm))
 
+  ;; Priorities in [A-G] range
+  (setq
+   org-priority-highest ?A
+   org-priority-lowest ?G
+   org-priority-default ?E)
+
   ;; Agenda & todo-list vars
   (setq
-   org-agenda-files '("~/Dropbox/org/personal.org" "~/Dropbox/org/work.org" "~/Dropbox/org/system.org")
+   org-agenda-files '("~/Dropbox/org/system.org")
    org-agenda-skip-scheduled-if-done t
    org-agenda-skip-deadline-if-done t
    org-enforce-todo-dependencies t
    org-enforce-todo-checkbox-dependencies t
-   org-agenda-dim-blocked-tasks 'invisible
    org-agenda-todo-ignore-scheduled t
    org-agenda-todo-ignore-deadlines t)
 
@@ -359,21 +364,13 @@ you should place your code here."
 
   ;; Todo
   (setq org-todo-keywords
-        (quote ((sequence "TODO(t)" "DOING(i)" "WAIT(w@/!)" "|" "DONE(d)" "ABANDONED(a@/!)"))))
+        (quote ((sequence "TODO(t)" "DOING(i)" "MAYBE(m)" "|" "DONE(d)"))))
   (setq org-todo-keyword-faces
         (quote (("DOING" :foreground "deep sky blue" :weight bold)
                 ("WAIT" :foreground "orange" :weight bold)
                 ("CANCELLED" :foreground "forest green" :weight bold)))
         org-use-fast-todo-selection t
         org-treat-S-cursor-todo-selection-as-state-change nil)
-
-  (setq org-todo-state-tags-triggers
-        (quote (("CANCELLED" ("cancelled" . t))
-                ("WAIT" ("wait" . t))
-                (done ("wait"))
-                ("TODO" ("wait") ("cancelled"))
-                ("DOING" ("wait") ("cancelled"))
-                ("DONE" ("wait") ("cancelled")))))
 
   ;; Automatic clock-in/out by Sacha + some tuning
   ;; <<<<<<
