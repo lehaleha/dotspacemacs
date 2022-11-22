@@ -135,8 +135,8 @@ values."
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
-   dotspacemacs-default-font '("Input"
-                               :size 16
+   dotspacemacs-default-font '("Cascadia Mono"
+                               :size 17
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -307,6 +307,10 @@ you should place your code here."
     "Load a file in current user's configuration directory"
     (load-file (expand-file-name file dotspacemacs-directory)))
 
+  ;; Common stuff
+  (setq-default 
+   dotspacemacs-show-trailing-whitespace nil)
+
   ;; Humane C/C++ style
   (setq-default
    c-basic-offset 4
@@ -339,6 +343,9 @@ you should place your code here."
 
   ;; Set time format for stats
   (setq org-duration-format (quote h:mm))
+
+  ;; Don't insert newlines automatically
+  (setf org-blank-before-new-entry '((heading . never) (plain-list-item . never)))
 
   ;; Priorities in [A-G] range
   (setq
