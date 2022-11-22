@@ -345,7 +345,7 @@ you should place your code here."
   (setq org-duration-format (quote h:mm))
 
   ;; Don't insert newlines automatically
-  (setf org-blank-before-new-entry '((heading . never) (plain-list-item . never)))
+  (setf org-blank-before-new-entry '((heading . nil) (plain-list-item . nil)))
 
   ;; Priorities in [A-G] range
   (setq
@@ -355,7 +355,7 @@ you should place your code here."
 
   ;; Agenda & todo-list vars
   (setq
-   org-agenda-files '("~/Dropbox/org/system.org")
+   org-agenda-files '("~/OneDrive/org/system.org")
    org-agenda-skip-scheduled-if-done t
    org-agenda-skip-deadline-if-done t
    org-enforce-todo-dependencies t
