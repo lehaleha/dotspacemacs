@@ -438,7 +438,7 @@ you should place your code here."
                                         ; current buffer are used (first) as a
                                         ; refile target
                              (org-agenda-files :maxlevel . 2)
-                             ("~/Dropbox/org/someday.org" :maxlevel . 2)
+                             ("~/OneDrive/org/someday.org" :maxlevel . 2)
                              ))
 
   ;; provide refile targets as paths, including the file name
@@ -457,12 +457,12 @@ you should place your code here."
   ;; Capture
   ;; <<<<<<<
   (setq org-capture-templates
-        '(("t" "Todo" entry (file+olp "~/Dropbox/org/system.org" "Inbox")
+        '(("t" "Todo" entry (file+olp "~/OneDrive/org/system.org" "Inbox")
            "* TODO %?\n")
-          ("i" "Inbox" entry (file+olp "~/Dropbox/org/system.org" "Inbox")
+          ("i" "Inbox" entry (file+olp "~/OneDrive/org/system.org" "Inbox")
            "* %?\n")
           ("T" "Todo in clocked-in" entry (clock) "* TODO %?\n")
-          ("n" "Note" item (file+olp "~/Dropbox/org/system.org" "Notes")
+          ("n" "Note" item (file+olp "~/OneDrive/org/system.org" "Notes")
            "- %u %?")
           ("N" "Note in clocked-in" item (clock) "- %u %?")
           ))
