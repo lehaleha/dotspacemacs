@@ -438,7 +438,6 @@ you should place your code here."
                                         ; current buffer are used (first) as a
                                         ; refile target
                              (org-agenda-files :maxlevel . 2)
-                             ("~/OneDrive/org/someday.org" :maxlevel . 2)
                              ))
 
   ;; provide refile targets as paths, including the file name
@@ -453,7 +452,6 @@ you should place your code here."
   (setq org-outline-path-complete-in-steps nil)
 
   ;; >>>>>>>
-
   ;; Capture
   ;; <<<<<<<
   (setq org-capture-templates
