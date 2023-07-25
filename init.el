@@ -371,11 +371,11 @@ you should place your code here."
 
   ;; Todo
   (setq org-todo-keywords
-        (quote ((sequence "TODO(t)" "DOING(i)" "MAYBE(m)" "|" "DONE(d)"))))
+        (quote ((sequence "TODO(t)" "DOING(i)" "WAIT(w)" "|" "DONE(d)" "NOPE(n)"))))
   (setq org-todo-keyword-faces
         (quote (("DOING" :foreground "deep sky blue" :weight bold)
                 ("WAIT" :foreground "orange" :weight bold)
-                ("CANCELLED" :foreground "forest green" :weight bold)))
+                ("NOPE" :foreground "forest green" :weight bold)))
         org-use-fast-todo-selection t
         org-treat-S-cursor-todo-selection-as-state-change nil)
 
